@@ -1,0 +1,10 @@
+{
+    "Name": "Blåhaj",
+    "Description": "Shark toy",
+    "Amount": 999,
+    "Price": 25,
+    "AssetBundleName": "blahajbundle",
+    "PrefabPath": "Assets/Blahaj.prefab",
+    "IconStandardPath": "Assets/icons/standard.png",
+    "IconDroppedPath": "Assets/icons/dropped.png"
+}
