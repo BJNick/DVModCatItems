@@ -1,14 +1,14 @@
 ﻿# Blåhaj
 
-![screenshot.png](screenshot.png)
+This mod adds [Blåhaj](https://knowyourmeme.com/editorials/guides/what-does-blahaj-mean-the-seemingly-inexplicable-popularity-of-ikeas-iconic-shark-plushie-explained) to Derail Valley.
 
-This mod adds Blåhaj to Derail Valley.
+![screenshot.png](screenshot.png)
 
 ## How to install
 
 1. install Unity Mod Manager(UMM)
 2. install [Custom Item Mod](TODO)
-3. download this mods zip from the 'Releases' tab and throw it into UMM
+3. download this mods zip from the [Releases](https://git.tostiman.com/tostiman/dv_blahaj/releases) tab and throw it into UMM
 
 After installing, you can buy the item in the shops.
 
