@@ -8,7 +8,7 @@ This mod adds [Blåhaj](https://knowyourmeme.com/editorials/guides/what-does-bla
 
 1. install Unity Mod Manager(UMM)
 2. install [Custom Item Mod](https://github.com/t0stiman/dv_custom_item_mod)
-3. download this mods zip from the [Releases](https://git.tostiman.com/tostiman/dv_blahaj/releases) tab and throw it into UMM
+3. download this mods zip from the [Releases](https://git.tostiman.com/tostiman/dv_blahaj/releases) tab and manually extract into DV's mod folder
 
 After installing, you can buy the item in the shops.
 
