@@ -1,8 +1,8 @@
 {
 	"Id": "CatItems",
 	"Version": "0.0.3",
-	"DisplayName": "Cat Items",
-	"Author": "Breadsticks",
+	"DisplayName": "Cat Items Animated",
+	"Author": "BJNick",
 	"HomePage": "https://git.tostiman.com/tostiman/dv_blahaj",
 	"Repository": "https://git.tostiman.com/tostiman/dv_blahaj/raw/branch/master/repository.json",
 	"Requirements": ["custom_item_mod-0.2.0"],
