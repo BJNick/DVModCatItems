@@ -660,8 +660,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e616d8e94d77204188746bbeb270226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bundleName: replacethiswithacat
-  exportFolder: D:\Projects\Mods\DVCatItem\items\TabbyCat
+  bundleName: WhiteSpottedCatBundle
+  exportFolder: D:\Projects\Mods\DVCatItem\items\WhiteSpottedCat
 --- !u!4 &1768681976
 Transform:
   m_ObjectHideFlags: 0
