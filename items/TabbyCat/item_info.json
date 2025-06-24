@@ -1,0 +1,10 @@
+{
+    "Name": "Tabby Cat",
+    "Description": "Your new best friend",
+    "Amount": 99,
+    "Price": 10000,
+    "AssetBundleName": "tabbycatbundle",
+    "PrefabPath": "Assets/TabbyCat.prefab",
+    "IconStandardPath": "Assets/icons/cat-tabby.png",
+    "IconDroppedPath": "Assets/icons/cat-outline.png"
+}

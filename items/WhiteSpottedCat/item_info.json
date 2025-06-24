@@ -1,0 +1,10 @@
+{
+    "Name": "White Spotted Cat",
+    "Description": "Your new best friend",
+    "Amount": 99,
+    "Price": 10000,
+    "AssetBundleName": "whitespottedcatbundle",
+    "PrefabPath": "Assets/WhiteSpottedCat.prefab",
+    "IconStandardPath": "Assets/icons/cat-white-spotted.png",
+    "IconDroppedPath": "Assets/icons/cat-outline.png"
+}

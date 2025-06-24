@@ -1,4 +1,4 @@
-$DVInstallDir = "D:\Programs\Derail Valley"
+$DVInstallDir = "D:\SteamLibrary\steamapps\common\Derail Valley"
 
 Set-Location "$PSScriptRoot"
 $FilesToInclude = "info.json","LICENSE","README.md","items/*"

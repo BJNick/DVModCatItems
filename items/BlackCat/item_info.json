@@ -1,0 +1,10 @@
+{
+    "Name": "Black Cat",
+    "Description": "Your new best friend",
+    "Amount": 99,
+    "Price": 10000,
+    "AssetBundleName": "blackcatbundle",
+    "PrefabPath": "Assets/BlackCat.prefab",
+    "IconStandardPath": "Assets/icons/cat-black.png",
+    "IconDroppedPath": "Assets/icons/cat-outline.png"
+}

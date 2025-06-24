@@ -1,0 +1,10 @@
+{
+    "Name": "Orange Cat",
+    "Description": "Your new best friend",
+    "Amount": 99,
+    "Price": 10000,
+    "AssetBundleName": "orangecatbundle",
+    "PrefabPath": "Assets/OrangeCat.prefab",
+    "IconStandardPath": "Assets/icons/cat-orange.png",
+    "IconDroppedPath": "Assets/icons/cat-outline.png"
+}

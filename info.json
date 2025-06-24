@@ -1,9 +1,11 @@
 {
-	"Id": "blahaj",
-	"Version": "0.0.2",
-	"DisplayName": "Blåhaj",
-	"Author": "Tostiman",
+	"Id": "CatItems",
+	"Version": "0.0.3",
+	"DisplayName": "Cat Items",
+	"Author": "Breadsticks",
 	"HomePage": "https://git.tostiman.com/tostiman/dv_blahaj",
 	"Repository": "https://git.tostiman.com/tostiman/dv_blahaj/raw/branch/master/repository.json",
-	"Requirements": ["custom_item_mod-0.2.0"]
+	"Requirements": ["custom_item_mod-0.2.0"],
+	"AssemblyName": "CatItems.dll",
+	"EntryMethod": "CatItems.Main.Load"
 }
