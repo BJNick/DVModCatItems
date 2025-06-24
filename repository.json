@@ -1,9 +1,9 @@
 {
     "Releases": [
         {
-            "Id": "blahaj",
-            "Version": "0.0.2",
-            "DownloadUrl": "https://git.tostiman.com/tostiman/dv_blahaj/releases/download/0.0.2/Blahaj.zip"
+            "Id": "CatItems",
+            "Version": "0.0.3",
+            "DownloadUrl": "https://github.com/BJNick/DVModCatItems/releases/download/v0.0.3/CatItemsAnimated-v0.0.3.zip"
         }
     ]
 }

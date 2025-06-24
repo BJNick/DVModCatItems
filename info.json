@@ -3,8 +3,8 @@
 	"Version": "0.0.3",
 	"DisplayName": "Cat Items Animated",
 	"Author": "BJNick",
-	"HomePage": "https://git.tostiman.com/tostiman/dv_blahaj",
-	"Repository": "https://git.tostiman.com/tostiman/dv_blahaj/raw/branch/master/repository.json",
+	"HomePage": "https://github.com/BJNick/DVModCatItems",
+	"Repository": "https://github.com/BJNick/DVModCatItems/blob/master/repository.json",
 	"Requirements": ["custom_item_mod-0.2.0"],
 	"AssemblyName": "CatItems.dll",
 	"EntryMethod": "CatItems.Main.Load"
