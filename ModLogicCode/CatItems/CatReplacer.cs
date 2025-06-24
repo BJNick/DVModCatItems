@@ -21,14 +21,21 @@ namespace CatItems {
         public static CattleZone aCattleZone;
         
         public static List<GameObject> catsToReplace = new();
+        
+        public static float lastCheckTime = -1f;
 
         public void Update() {
+            if (lastCheckTime + 1f > Time.time) {
+                return; // only check every half second
+            }
+            lastCheckTime = Time.time;
+            
             // Replace fake cat models with animated cats
             if (catsToReplace.Count > 0) {
                 if (!aCattleZone) {
                     aCattleZone = FindObjectOfType<CattleZone>();
                     if (!aCattleZone) {
-                        mod.Logger.Error("CattleZone not found, cannot replace cats :(");
+                        mod.Logger.Error("CattleZone not found, cannot replace cats yet :(");
                         return;
                     }
                 }
@@ -79,7 +86,7 @@ namespace CatItems {
         [HarmonyPostfix]
         private static void AfterStart(CattleZone __instance) {
             CatReplacer.aCattleZone = __instance;
-            CatReplacer.mod.Logger.Log("CattleZone_Start_Patch.AfterStart called");
+            //CatReplacer.mod.Logger.Log("CattleZone_Start_Patch.AfterStart called");
         }
     }
     
@@ -93,7 +100,7 @@ namespace CatItems {
             foreach (Transform child in __instance.transform) {
                 if (child.name.StartsWith("replacethiswithacat-")) {
                     CatReplacer.catsToReplace.Add(child.gameObject);
-                    CatReplacer.mod.Logger.Log("ShopRestocker_Awake_Patch.AfterAwake replace cat called for " + child.name);
+                    //CatReplacer.mod.Logger.Log("ShopRestocker_Awake_Patch.AfterAwake replace cat called for " + child.name);
                     return;
                 }
             }
@@ -113,7 +120,7 @@ namespace CatItems {
             foreach (Transform child in __instance.transform.GetChild(0)) {
                 if (child.name.StartsWith("replacethiswithacat-")) {
                     CatReplacer.catsToReplace.Add(child.gameObject);
-                    CatReplacer.mod.Logger.Log("ShelfItem_Awake_Patch.AfterAwake replace cat called for " + child.name);
+                    //CatReplacer.mod.Logger.Log("ShelfItem_Awake_Patch.AfterAwake replace cat called for " + child.name);
                     return;
                 }
             }
