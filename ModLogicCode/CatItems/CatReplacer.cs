@@ -41,6 +41,9 @@ namespace CatItems {
                     var name = catModel.name;
                     string prefabName;
                     switch (name) {
+                        case "already-replaced-cat":
+                            mod.Logger.Log("Cat model " + name + " already replaced, skipping.");
+                            continue; // already replaced, skip
                         case "replacethiswithacat-black":
                             prefabName = "CatSimpleBlack_rigged";
                             break;
@@ -71,12 +74,37 @@ namespace CatItems {
                     var catPrefab = Instantiate(prefab, catRoot.transform);
                     catPrefab.transform.localPosition = new Vector3(0, 0, 0.25f);
                     catPrefab.transform.localRotation = Quaternion.Euler(0, 180, 0);
+                    StabilizeRigidbody(catRoot.gameObject);
                 }
 
                 catsToReplace.Clear();
             }
         }
 
+        public void StabilizeRigidbody(GameObject gameObject) {
+            var rb = gameObject.GetComponentInChildren<Rigidbody>();
+            if (!rb) {
+                return; // A store display item, no need to stabilize
+            }
+            // Put center of mass lower to reduce toppling over
+            rb.centerOfMass = new Vector3(0, -0.1f, 0.25f);
+            // Increase angular drag to prevent spinning
+            rb.angularDrag = 10f;
+            // Reduce mass to make it easier to move along with a train
+            rb.mass = 0.1f;
+            // Add friction materials to reduce sliding
+            var material = new PhysicMaterial {
+                dynamicFriction = 1f,
+                staticFriction = 1f,
+                bounciness = 0f,
+                frictionCombine = PhysicMaterialCombine.Maximum
+            };
+            var colliders = gameObject.GetComponentsInChildren<Collider>();
+            foreach (var collider in colliders) {
+                collider.material = material;
+            }
+        }
+        
         public void SearchForCattleZone() {
             if (aCattleZone) {
                 return; // already found

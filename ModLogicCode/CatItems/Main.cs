@@ -6,6 +6,7 @@ using Object = UnityEngine.Object;
 
 namespace CatItems
 {
+    [EnableReloading]
     static class Main
     {
         public static bool enabled;
