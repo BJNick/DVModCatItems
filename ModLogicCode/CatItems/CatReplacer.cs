@@ -14,32 +14,29 @@ using UnityModManagerNet;
  * CatSimpleYellow_rigged
  */
 namespace CatItems {
-    
     public class CatReplacer : MonoBehaviour {
-        
         public static UnityModManager.ModEntry mod;
-        public static CattleZone aCattleZone;
-        
+
         public static List<GameObject> catsToReplace = new();
-        
-        public static float lastCheckTime = -1f;
+
+        public CattleZone aCattleZone;
+        public float lastCheckTime = -1f;
+        public int failedAttempts;
 
         public void Update() {
-            if (lastCheckTime + 1f > Time.time) {
-                return; // only check every half second
+            if (!aCattleZone && catsToReplace.Count > 0) {
+                SearchForCattleZone();
+                return;
             }
+
+            if (lastCheckTime + 1f > Time.time) {
+                return; // only check every second
+            }
+
             lastCheckTime = Time.time;
-            
+
             // Replace fake cat models with animated cats
             if (catsToReplace.Count > 0) {
-                if (!aCattleZone) {
-                    aCattleZone = FindObjectOfType<CattleZone>();
-                    if (!aCattleZone) {
-                        mod.Logger.Error("CattleZone not found, cannot replace cats yet :(");
-                        return;
-                    }
-                }
-                
                 foreach (GameObject catModel in catsToReplace) {
                     var name = catModel.name;
                     string prefabName;
@@ -61,35 +58,58 @@ namespace CatItems {
                             prefabName = "CatSimpleGray_rigged";
                             break;
                     }
+
                     var prefab = aCattleZone.agentPrefabs.First(it => it.prefab.name == prefabName).prefab;
                     if (!prefab) {
                         mod.Logger.Error("Prefab " + prefabName + " not found in the cattle zone.");
                         prefab = aCattleZone.agentPrefabs.First().prefab;
                     }
+
                     var catRoot = catModel.transform.parent;
                     catModel.name = "already-replaced-cat";
                     catModel.GetComponent<MeshRenderer>().enabled = false;
                     var catPrefab = Instantiate(prefab, catRoot.transform);
                     catPrefab.transform.localPosition = new Vector3(0, 0, 0.25f);
                     catPrefab.transform.localRotation = Quaternion.Euler(0, 180, 0);
-                    //mod.Logger.Log("Replaced " + name + " with " + prefabName);
                 }
+
                 catsToReplace.Clear();
             }
         }
-    }
-    
-    // patch CattleZone
-    [HarmonyPatch(typeof(CattleZone))]
-    internal static class CattleZone_Start_Patch {
-        [HarmonyPatch(nameof(CattleZone.Start))]
-        [HarmonyPostfix]
-        private static void AfterStart(CattleZone __instance) {
-            CatReplacer.aCattleZone = __instance;
-            //CatReplacer.mod.Logger.Log("CattleZone_Start_Patch.AfterStart called");
+
+        public void SearchForCattleZone() {
+            if (aCattleZone) {
+                return; // already found
+            }
+
+            var checkDelay = Mathf.Clamp(failedAttempts * failedAttempts, 1f, 60f);
+            if (Time.time - lastCheckTime < checkDelay) {
+                return; // only check every 1-60 seconds depending on failed attempts
+            }
+
+            lastCheckTime = Time.time;
+            aCattleZone = FindCattleZone();
+            if (!aCattleZone) {
+                failedAttempts++;
+                mod.Logger.Log("Failed to find a CattleZone, retrying in " + checkDelay + " seconds.");
+            } else {
+                failedAttempts = 0; // reset on success
+            }
+        }
+
+        public CattleZone FindCattleZone(string withPrefabName = "CatSimpleBlack_rigged") {
+            var cattleZones = FindObjectsOfType<CattleZone>();
+            foreach (var cattleZone in cattleZones) {
+                if (cattleZone.agentPrefabs.Any(it => it.prefab.name == withPrefabName)) {
+                    mod.Logger.Log("Found CattleZone with prefab " + withPrefabName);
+                    return cattleZone;
+                }
+            }
+
+            return null;
         }
     }
-    
+
     // Patch ShopRestocker
     [HarmonyPatch(typeof(ShopRestocker))]
     internal static class ShopRestocker_Awake_Patch {
@@ -106,7 +126,7 @@ namespace CatItems {
             }
         }
     }
-    
+
     // Also patch ShelfItem
     [HarmonyPatch(typeof(ShelfItem))]
     internal static class ShelfItem_Awake_Patch {
@@ -116,6 +136,7 @@ namespace CatItems {
             if (__instance.transform.GetChild(0) == null) {
                 return;
             }
+
             // iterate over all children of the ShelfItem and see if any of them match
             foreach (Transform child in __instance.transform.GetChild(0)) {
                 if (child.name.StartsWith("replacethiswithacat-")) {
@@ -126,5 +147,4 @@ namespace CatItems {
             }
         }
     }
-    
 }

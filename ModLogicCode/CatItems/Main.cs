@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using DV;
-using DV.Booklets;
-using DV.Logic.Job;
-using DV.ThingTypes;
+﻿using System.Reflection;
 using HarmonyLib;
 using UnityEngine;
 using UnityModManagerNet;
 using Object = UnityEngine.Object;
-using Random = UnityEngine.Random;
 
 namespace CatItems
 {
