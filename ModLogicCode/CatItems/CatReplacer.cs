@@ -35,9 +35,15 @@ namespace CatItems {
 
             lastCheckTime = Time.time;
 
+            // Remove unloaded/destroyed unity objects from the list
+            catsToReplace.RemoveAll(it => !it);
+            
             // Replace fake cat models with animated cats
             if (catsToReplace.Count > 0) {
                 foreach (GameObject catModel in catsToReplace) {
+                    if (!catModel) {
+                        continue; // skip if the model is null
+                    }
                     var name = catModel.name;
                     string prefabName;
                     switch (name) {
@@ -62,7 +68,7 @@ namespace CatItems {
                             break;
                     }
 
-                    var prefab = aCattleZone.agentPrefabs.First(it => it.prefab.name == prefabName).prefab;
+                    var prefab = aCattleZone.agentPrefabs.First(it => it.prefab && it.prefab.name == prefabName).prefab;
                     if (!prefab) {
                         mod.Logger.Error("Prefab " + prefabName + " not found in the cattle zone.");
                         prefab = aCattleZone.agentPrefabs.First().prefab;
@@ -106,7 +112,7 @@ namespace CatItems {
         }
         
         public void SearchForCattleZone() {
-            if (aCattleZone) {
+            if (aCattleZone && aCattleZone.agentPrefabs.Length > 0) {
                 return; // already found
             }
 
